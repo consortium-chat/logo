@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <svg viewBox="0 0 400 400" width="24rem">
+      <path id="c" fill="#477ab5"/>
+      <path id="face1" fill="#a4e5f5"/>
+      <path id="face2" fill="#568a97"/>
+      <path id="face3" fill="#70b7c9"/>
+    </svg>
+    <label>
+      <div>R-factor</div>
+      <input id="range" type="range" min="0.66666666" max="0.8" step="0.00000001" value="0.75">
+    </label>
+    <script>
+      const range = document.getElementById("range");
+      range.addEventListener("input", render);
+      render();
+      function render () {
+        const r = range.value;
+        const d = 1 - r;
+        const q = 100 * Math.sqrt(3);
+        document.getElementById("c").setAttribute("d", `M ${q + 200} 100 a 200 200 300 1 0 0 200 l ${-q * d} ${-100 * d} a ${200 * r} ${200 * r} 300 1 1 0 ${-200 * r} z`);
+        document.getElementById("face1").setAttribute("d", `M 200 200 l ${-2 * q * d} ${-200 * d} ${2 * q * d} ${-200 * d} ${2 * q * d} ${200 * d} z`);
+        document.getElementById("face2").setAttribute("d", `M 200 200 l ${2 * q * d} ${-200 * d} 0 ${400 * d} ${-2 * q * d} ${200 * d} z`);
+        document.getElementById("face3").setAttribute("d", `M 200 200 l 0 ${400 * d} ${-2 * q * d} ${- 200 * d} 0 ${-400 * d} z`);
+      }
+    </script>
+  </body>
+</html>
